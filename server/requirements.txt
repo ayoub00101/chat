@@ -1,2 +1,5 @@
-Flask
-Flask-SocketIO
+Flask==2.0.1
+Flask-SocketIO==5.2.1
+git add requirements.txt
+git commit -m "Add requirements.txt"
+git push origin main
