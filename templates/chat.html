@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        $(document).ready(()=>{
+
+            var socket = io();
+            var username = "{{username}}";
+            
+            socket.on("send_message", function(msg) {
+                console.log("Message affiché.")
+                $("#chat").append("<div>" + msg + "</div>"); // Utilisation de div pour interpréter HTML
+            })
+            
+            $("#send-button").click(function(){
+                console.log("Message envoyé.")
+                socket.emit("receive_message",{username: username,message: $("#input_text").val()})
+                $("#input_text").val("")
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <h1>Chat</h1>
+
+    <div id="chat" style="border:1px solid #000; height:300px; overflow-y:scroll;"></div>
+    <label for="input_text">Message:</label>
+    <input type="text" name="input_text" id="input_text">
+    <button id="send-button">Envoyer</button>
+    <a href="/"><h2>Retour à l'accueil</h2></a>
+</body>
+</html>
